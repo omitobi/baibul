@@ -32,13 +32,9 @@ class NativeAppServiceProvider
 
         Menu::new()
             ->appMenu()
-            ->submenu('About', Menu::new()
-                ->link('https://omitobisam.com', 'Transprime Research')
-            )
-            ->submenu('View', Menu::new()
-                ->toggleFullscreen()
-                ->separator()
-                ->link('https://laravel.com', 'Learn More', 'CmdOrCtrl+L')
+            ->submenu(
+                'About',
+                Menu::new()->link('https://omitobisam.com', 'Transprime Research')
             )
             ->register();
 
