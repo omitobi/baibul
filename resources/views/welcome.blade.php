@@ -18,23 +18,86 @@
     </head>
     <body class="antialiased">
         <div class="card mb-3" style="max-width: 400px; min-width: 400px; min-height:250px; max-height: 250px">
-                <div class="row g-0">
-                    <div class="col-4 bg-light">
-                        <img src="{{ asset('images/bible.jpg') }}" class="img-fluid rounded-start" alt="...">
-                        <div class="small text-truncate">
-                            <sup>
-                                <a href="{{ $link }}" class="">{{ $link }}</a>
-                            </sup>
+            <div class="row g-0">
+                <div class="col-12">
+                    <div class="card-body">
+                        <h5 class="card-title border-bottom py-1">Bible Reader</h5>
+                        <form class="row" method="get">
+                            <div class="col-6">
+                                <label for="book" class="form-label">Book</label>
+                                <input
+                                    class="form-control"
+                                    list="books"
+                                    id="book"
+                                    name="book"
+                                    value="{{ request('book', 'John') }}"
+                                    placeholder="Type to search...">
+                                <datalist id="books">
+                                    @foreach($books ?? [] as $book)
+                                        <option value="{{ $book }}" onclick="getAudio('book', '{{ $book }}')">
+                                    @endforeach
+                                </datalist>
+                            </div>
+                            <div class="col-4">
+                                <label for="chapter" class="form-label">Chapter</label>
+                                <input
+                                    class="form-control"
+                                    list="chapters"
+                                    id="chapter"
+                                    name="chapter"
+                                    value="{{ request('chapter', '1') }}"
+                                    placeholder="Search...">
+                                <datalist id="chapters">
+                                    @foreach($chapters ?? [] as $chapter)
+                                        <option value="{{ $chapter }}">
+                                    @endforeach
+                                </datalist>
+                            </div>
+                            <div class="col-2">
+                            <label for="submit" class="form-label">..</label>
+                            <button type="submit" class="btn btn-outline-dark">Go</button>
                         </div>
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $scripture_reference }} {{ $reference_version }}</h5>
-                            <p class="card-text small">{!! $content !!}</p>
-                            <p class="card-text"><small class="text-body-secondary">{{ $date }}</small></p>
-                        </div>
+                        </form>
+
+                        <iframe
+                            src="https://www.esv.org/audio-player/ {{request('book', 'John') }} + {{ request('chapter', '1') }}"
+                            class="mt-2"
+                            style="border: 0; width: 100%; height: 109px;"
+                        ></iframe>
                     </div>
                 </div>
             </div>
+        </div>
+{{--        <div class="card mb-3" style="max-width: 400px; min-width: 400px; min-height:250px; max-height: 250px">--}}
+{{--                <div class="row g-0">--}}
+{{--                    <div class="col-4 bg-light">--}}
+{{--                        <img src="{{ asset('images/bible.jpg') }}" class="img-fluid rounded-start" alt="...">--}}
+{{--                        <div class="small text-truncate">--}}
+{{--                            <sup>--}}
+{{--                                <a href="{{ $link }}" class="">{{ $link }}</a>--}}
+{{--                            </sup>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-8">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <h5 class="card-title">{{ $scripture_reference }} {{ $reference_version }}</h5>--}}
+{{--                            <p class="card-text small">{!! $content !!}</p>--}}
+{{--                            <p class="card-text"><small class="text-body-secondary">{{ $date }}</small></p>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+    <script type="text/javascript">
+        function getAudio(field, value) {
+            // Construct URLSearchParams object instance from current URL querystring.
+            const queryParams = new URLSearchParams(window.location.search);
+
+            // Set new or modify existing parameter value.
+            queryParams.set(field, value);
+
+            // Replace current querystring with the new one.
+            history.replaceState(null, null, "?"+queryParams.toString());
+        }
+    </script>
     </body>
 </html>

@@ -30,5 +30,12 @@ Route::get('/', function () {
         ])->first()
     );
 
+    $data['books'] = json_decode(
+        \Illuminate\Support\Facades\File::get(base_path('bibles/books.json')),
+        true
+    );
+
+    $data['chapters'] = range(1, 150);
+
     return view('welcome', $data);
 });
