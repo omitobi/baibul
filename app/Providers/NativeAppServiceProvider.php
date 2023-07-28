@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Native\Laravel\Facades\ContextMenu;
 use Native\Laravel\Facades\Dock;
+use Native\Laravel\Facades\MenuBar;
 use Native\Laravel\Facades\Window;
 use Native\Laravel\Facades\GlobalShortcut;
 use Native\Laravel\Menu\Menu;
@@ -16,14 +17,13 @@ class NativeAppServiceProvider
      */
     public function boot(): void
     {
-
-//        dd($feed);
         Window::open()
             ->position(1500, 0)
             ->width(420)
             ->height(340)
             ->alwaysOnTop()
             ->resizable(false)
+            ->backgroundColor('#00000050')
 //            ->closable(false)
             ->maximizable(false)
             ->minimizable(false);
@@ -33,8 +33,7 @@ class NativeAppServiceProvider
         Menu::new()
             ->appMenu()
             ->submenu('About', Menu::new()
-                ->link('https://beyondco.de', 'Beyond Code')
-                ->link('https://simonhamp.me', 'Simon Hamp')
+                ->link('https://omitobisam.com', 'Transprime Research')
             )
             ->submenu('View', Menu::new()
                 ->toggleFullscreen()
@@ -42,6 +41,9 @@ class NativeAppServiceProvider
                 ->link('https://laravel.com', 'Learn More', 'CmdOrCtrl+L')
             )
             ->register();
+
+        MenuBar::create()
+            ->showDockIcon();
 
         /**
             Dock::menu(
