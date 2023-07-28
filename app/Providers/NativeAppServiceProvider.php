@@ -20,8 +20,8 @@ class NativeAppServiceProvider
 //        dd($feed);
         Window::open()
             ->position(1500, 0)
-            ->width(400)
-            ->height(300)
+            ->width(420)
+            ->height(340)
             ->alwaysOnTop()
             ->resizable(false)
 //            ->closable(false)
