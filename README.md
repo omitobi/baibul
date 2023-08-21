@@ -1,4 +1,4 @@
-<p align="center">![Baibuil_Icon.png](public%2Fimages%2FBaibuil_Icon.png)</p>
+<p align="center"><img src="https://raw.githubusercontent.com/omitobi/baibul/master/public/images/Baibuil_Icon.png"/></p>
 
 <p align="center">
 ...
