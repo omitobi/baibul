@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('bible-ready', 'esv-bible-ready');
+Route::view('bible-ready-main', 'bible-ready-main')->name('bible-ready-main');
 Route::get('/', function () {
     $feed = \Feeds::make('http://www.biblegateway.com/usage/votd/rss/votd.rdf?31');
 

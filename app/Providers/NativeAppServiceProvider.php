@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Native\Laravel\Client\Client;
 use Native\Laravel\Facades\ContextMenu;
 use Native\Laravel\Facades\Dock;
 use Native\Laravel\Facades\MenuBar;
@@ -17,8 +18,8 @@ class NativeAppServiceProvider
      */
     public function boot(): void
     {
-        Window::open()
-            ->position(1500, 0)
+        $window = new \Native\Laravel\Windows\PendingOpenWindow('main');
+        $window->position(1500, 0)
             ->width(420)
             ->height(340)
             ->alwaysOnTop()
@@ -27,6 +28,33 @@ class NativeAppServiceProvider
 //            ->closable(false)
             ->maximizable(false)
             ->minimizable(false);
+
+        $window2 = new \Native\Laravel\Windows\PendingOpenWindow('main');
+        $window2->position(1500, 0)
+            ->width(1000)
+            ->height(1000)
+            ->alwaysOnTop()
+            ->resizable(false)
+            ->backgroundColor('#00000050')
+//            ->closable(false)
+            ->maximizable(false)
+            ->minimizable(false);
+
+        $window2->setClient(app(Client::class));
+
+
+//            ->movable(false)
+//            ->rememberState();
+//        Window::open()
+//            ->position(1500, 0)
+//            ->width(420)
+//            ->height(340)
+//            ->alwaysOnTop()
+//            ->resizable(false)
+//            ->backgroundColor('#00000050')
+////            ->closable(false)
+//            ->maximizable(false)
+//            ->minimizable(false);
 //            ->movable(false)
 //            ->rememberState();
 
@@ -37,9 +65,10 @@ class NativeAppServiceProvider
                 Menu::new()->link('https://omitobisam.com', 'Transprime Research')
             )
             ->register();
+//
+//        MenuBar::create()
+//            ->showDockIcon();
 
-        MenuBar::create()
-            ->showDockIcon();
 
         /**
             Dock::menu(
