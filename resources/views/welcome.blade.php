@@ -174,18 +174,23 @@
     let url = bibleReadyUrl;
 
     function updateReadyBook(el) {
-        console.log({val: el.value});
-
         bibleReadyBook = el.value;
 
-        url = bibleReadyUrl + "?book=" + el.value;
+        updateBibleReadyUrl();
+    }
 
-        console.log({url: url})
+    function updateReadyChapter(el) {
+        bibleReadyChapter = el.value;
+
+        updateBibleReadyUrl();
+    }
+
+    function updateBibleReadyUrl() {
+        url = bibleReadyUrl + "?book="+ bibleReadyBook + "&chapter=" + bibleReadyChapter;
+        console.log({url})
         document.getElementById("bible-ready-open-btn")
             .href = url;
     }
-
-
 </script>
 </body>
 </html>
