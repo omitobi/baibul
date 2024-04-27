@@ -42,25 +42,25 @@ class NativeAppServiceProvider
             ->showDockIcon();
 
         /**
-        Dock::menu(
-        Menu::new()
-        ->event(DockItemClicked::class, 'Settings')
-        ->submenu('Help',
-        Menu::new()
-        ->event(DockItemClicked::class, 'About')
-        ->event(DockItemClicked::class, 'Learn More…')
-        )
-        );
+            Dock::menu(
+                Menu::new()
+                    ->event(DockItemClicked::class, 'Settings')
+                    ->submenu('Help',
+                        Menu::new()
+                            ->event(DockItemClicked::class, 'About')
+                            ->event(DockItemClicked::class, 'Learn More…')
+                    )
+            );
 
-        ContextMenu::register(
-        Menu::new()
-        ->event(ContextMenuClicked::class, 'Do something')
-        );
+            ContextMenu::register(
+                Menu::new()
+                    ->event(ContextMenuClicked::class, 'Do something')
+            );
 
-        GlobalShortcut::new()
-        ->key('CmdOrCtrl+Shift+I')
-        ->event(ShortcutPressed::class)
-        ->register();
-         */
+            GlobalShortcut::new()
+                ->key('CmdOrCtrl+Shift+I')
+                ->event(ShortcutPressed::class)
+                ->register();
+        */
     }
 }
