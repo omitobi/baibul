@@ -117,19 +117,46 @@
                         <div class="card-body">
                             <h5 class="card-title border-bottom py-1">Bible Ready</h5>
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                                               aria-describedby="button-addon2">
-                                        <button class="btn btn-outline-dark" type="button" id="button-addon2">Search
-                                        </button>
+                                <form class="row" method="get">
+                                    <div class="col-6">
+                                        <label for="book" class="form-label">Book</label>
+                                        <input
+                                            class="form-control"
+                                            list="books"
+                                            id="bible-ready-book"
+                                            name="book"
+                                            value="{{ request('book', 'John') }}"
+                                            placeholder="Type to search..."
+                                            onchange="updateReadyBook(this)"
+                                        >
+                                        <datalist id="books">
+                                            @foreach($books ?? [] as $book)
+                                                <option value="{{ $book }}" onclick="getAudio('book', '{{ $book }}')">
+                                            @endforeach
+                                        </datalist>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="offset-3 col-md-6">
-                                        <a class="btn btn-lg btn-outline-dark" href="{{ route('bible-ready-main') }}" target="_blank">Open</a>
+                                    <div class="col-4">
+                                        <label for="bible-ready-chapter" class="form-label">Chapter</label>
+                                        <input
+                                            class="form-control"
+                                            list="chapters"
+                                            id="bible-ready-chapter"
+                                            name="chapter"
+                                            value="{{ request('chapter', '1') }}"
+                                            placeholder="Search..."
+                                            onchange="updateReadyChapter(this)"
+                                        >
+                                        <datalist id="chapters">
+                                            @foreach($chapters ?? [] as $chapter)
+                                                <option value="{{ $chapter }}">
+                                            @endforeach
+                                        </datalist>
                                     </div>
-                                </div>
+                                    <div class="col-2">
+                                        <label for="submit" class="form-label">..</label>
+                                        <a class="btn btn-outline-dark" id="bible-ready-open-btn" href="{{ route('bible-ready-main') }}" target="_blank">Open</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -139,5 +166,26 @@
     </div>
 </div>
 
+<script>
+    let bibleReadyUrl = {{ \Illuminate\Support\Js::from(route('bible-ready-main')) }};
+    let bibleReadyBook = "John";
+    let bibleReadyChapter = 1;
+
+    let url = bibleReadyUrl;
+
+    function updateReadyBook(el) {
+        console.log({val: el.value});
+
+        bibleReadyBook = el.value;
+
+        url = bibleReadyUrl + "?book=" + el.value;
+
+        console.log({url: url})
+        document.getElementById("bible-ready-open-btn")
+            .href = url;
+    }
+
+
+</script>
 </body>
 </html>

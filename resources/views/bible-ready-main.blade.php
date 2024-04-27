@@ -4,7 +4,12 @@
             <div class="col-12">
                 <div class="card-body">
                     <iframe
-                        src="{{ url('/bible-ready') }}"
+                        src="{{
+                            \Transprime\Url\Url::make(
+                                 fullDomain: url('/bible-ready'),
+                                 query: ['book' => request('book', 'John')],
+                            )
+                        }}"
                         class="mt-2"
                         style="border: 0; width: 100%; height: 100%;"
                     ></iframe>

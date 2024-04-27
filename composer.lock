@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9074128682f6f4b283a2c42b9075fb32",
+    "content-hash": "c11fc8d7035892ce49a248ac86948dcc",
     "packages": [
         {
             "name": "brick/math",
@@ -5803,6 +5803,59 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.2.7"
             },
             "time": "2023-12-08T13:03:43+00:00"
+        },
+        {
+            "name": "transprime-research/php-url",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/transprime-research/php-url.git",
+                "reference": "894ce78d95d1060a559035c504a5c626a6bf6d2c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/transprime-research/php-url/zipball/894ce78d95d1060a559035c504a5c626a6bf6d2c",
+                "reference": "894ce78d95d1060a559035c504a5c626a6bf6d2c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Transprime\\Url\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oluwatobi Samuel Omisakin",
+                    "email": "omisakin.oluwatobi@gmail.com"
+                }
+            ],
+            "description": "Urls in PHP made easy",
+            "homepage": "https://transprime-research.github.io/php-url/",
+            "keywords": [
+                "helpers",
+                "laravel",
+                "php",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/transprime-research/php-url/issues",
+                "source": "https://github.com/transprime-research/php-url/issues"
+            },
+            "time": "2023-08-23T21:07:42+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
