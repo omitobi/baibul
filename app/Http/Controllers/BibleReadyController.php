@@ -23,6 +23,8 @@ class BibleReadyController
             ->to($request->get(...), 'version')
             ->up(strtoupper(...));
 
+//        dd($book, $chapter, $version, $request->all());
+
         /** @var Arrayed $bookInBolls */
         $bookInBolls = piper('bibles/bolls.life.esv.json')
             ->to(base_path(...))
