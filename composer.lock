@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c11fc8d7035892ce49a248ac86948dcc",
+    "content-hash": "5ff7982e4917a1555e799d74fedb53bb",
     "packages": [
         {
             "name": "brick/math",
@@ -5805,6 +5805,73 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
+            "name": "transprime-research/arrayed",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/transprime-research/arrayed.git",
+                "reference": "e66cea4d4d307e0069792ad25468e4c17efacd48"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/transprime-research/arrayed/zipball/e66cea4d4d307e0069792ad25468e4c17efacd48",
+                "reference": "e66cea4d4d307e0069792ad25468e4c17efacd48",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4",
+                "transprime-research/piper": "^2.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "illuminate/support": ">=5.5",
+                "phpunit/phpunit": ">=8.0",
+                "squizlabs/php_codesniffer": "3.*",
+                "symfony/var-dumper": "^6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Transprime\\Arrayed\\Providers\\ArrayedServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Transprime\\Arrayed\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oluwatobi Samuel Omisakin",
+                    "email": "omisakin.oluwatobi@gmail.com"
+                }
+            ],
+            "description": "PHP Array(ed) in object oriented way wrapping PHP arrays in a consistent manner.",
+            "homepage": "https://transprime-research.github.io/arrayed/",
+            "keywords": [
+                "array",
+                "arrayed",
+                "arrays",
+                "helpers",
+                "laravel",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/transprime-research/arrayed/issues",
+                "source": "https://github.com/transprime-research/arrayed/issues"
+            },
+            "time": "2024-04-30T17:30:06+00:00"
+        },
+        {
             "name": "transprime-research/php-url",
             "version": "1.0.2",
             "source": {
@@ -5856,6 +5923,62 @@
                 "source": "https://github.com/transprime-research/php-url/issues"
             },
             "time": "2023-08-23T21:07:42+00:00"
+        },
+        {
+            "name": "transprime-research/piper",
+            "version": "2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/transprime-research/piper.git",
+                "reference": "1f64fdfc349ee9e55a175255c1e432ee918cf0d3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/transprime-research/piper/zipball/1f64fdfc349ee9e55a175255c1e432ee918cf0d3",
+                "reference": "1f64fdfc349ee9e55a175255c1e432ee918cf0d3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=6.0",
+                "symfony/var-dumper": "^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Transprime\\Piper\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oluwatobi Samuel Omisakin",
+                    "email": "omisakin.oluwatobi@gmail.com"
+                }
+            ],
+            "description": "PHP Pipe method execution with values from chained method executions",
+            "homepage": "https://transprime-research.github.io/piper/",
+            "keywords": [
+                "Piper",
+                "functional",
+                "helpers",
+                "laravel",
+                "php",
+                "pipe"
+            ],
+            "support": {
+                "issues": "https://github.com/transprime-research/piper/issues",
+                "source": "https://github.com/transprime-research/piper/issues"
+            },
+            "time": "2022-05-02T21:02:06+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

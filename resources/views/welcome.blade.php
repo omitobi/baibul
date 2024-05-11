@@ -154,7 +154,7 @@
                                     </div>
                                     <div class="col-2">
                                         <label for="submit" class="form-label">..</label>
-                                        <a class="btn btn-outline-dark" id="bible-ready-open-btn" href="{{ route('bible-ready-main') }}" target="_blank">Open</a>
+                                        <a class="btn btn-outline-dark" id="bible-ready-open-btn" href="{{ route('bolls-life-bible-ready') }}" target="_blank">Open</a>
                                     </div>
                                 </form>
                             </div>
@@ -165,32 +165,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    let bibleReadyUrl = {{ \Illuminate\Support\Js::from(route('bible-ready-main')) }};
-    let bibleReadyBook = "John";
-    let bibleReadyChapter = 1;
-
-    let url = bibleReadyUrl;
-
-    function updateReadyBook(el) {
-        bibleReadyBook = el.value;
-
-        updateBibleReadyUrl();
-    }
-
-    function updateReadyChapter(el) {
-        bibleReadyChapter = el.value;
-
-        updateBibleReadyUrl();
-    }
-
-    function updateBibleReadyUrl() {
-        url = bibleReadyUrl + "?book="+ bibleReadyBook + "&chapter=" + bibleReadyChapter;
-        console.log({url})
-        document.getElementById("bible-ready-open-btn")
-            .href = url;
-    }
-</script>
+@include('bible-chapter-switch-script')
 </body>
 </html>
