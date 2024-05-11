@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/bolls-life/bible-ready', [
+    \App\Http\Controllers\BibleReadyController::class, 'bollsChapter'
+])->name('bolls-life-bible-ready');
 Route::view('bible-ready', 'esv-bible-ready');
 Route::view('bible-ready-main', 'bible-ready-main')->name('bible-ready-main');
 Route::get('/', function () {
