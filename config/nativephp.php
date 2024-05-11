@@ -13,7 +13,7 @@ return [
      * usually in the form of a reverse domain name.
      * For example: com.nativephp.app
      */
-    'app_id' => env('NATIVEPHP_APP_ID'),
+    'app_id' => env('NATIVEPHP_APP_ID', 'com.baibul.a[['),
 
     /**
      * If your application allows deep linking, you can specify the scheme
@@ -29,7 +29,7 @@ return [
     /**
      * The author of your application.
      */
-    'author' => env('NATIVEPHP_APP_AUTHOR'),
+    'author' => env('NATIVEPHP_APP_AUTHOR', 'Transprime Research'),
 
     /**
      * The default service provider for your application. This provider
@@ -56,6 +56,25 @@ return [
         'default' => env('NATIVEPHP_UPDATER_PROVIDER', 'spaces'),
 
         'providers' => [
+            'github' => [
+
+                'driver' => 'github',
+
+                'repo' => env('GITHUB_REPO'),
+
+                'owner' => env('GITHUB_OWNER'),
+
+                'token' => env('GITHUB_TOKEN'),
+
+                'vPrefixedTagName' => env('GITHUB_V_PREFIXED_TAG_NAME', true),
+
+                'private' => env('GITHUB_PRIVATE', false),
+
+                'channel' => env('GITHUB_CHANNEL', 'latest'),
+
+                'releaseType' => env('GITHUB_RELEASE_TYPE', 'draft'),
+
+            ],
             's3' => [
                 'driver' => 's3',
                 'key' => env('AWS_ACCESS_KEY_ID'),
