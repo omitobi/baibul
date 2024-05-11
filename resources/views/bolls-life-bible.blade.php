@@ -49,7 +49,7 @@
                                     list="chapters"
                                     id="bible-ready-chapter"
                                     name="chapter"
-                                    value="{{ request('chapter', '1') }}"
+                                    value="{{ request('chapter', 1) }}"
                                     placeholder="Search..."
                                     onchange="updateReadyChapter(this)"
                                 >
@@ -70,9 +70,19 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row my-3">
+        <div class="col-md-12 d-flex justify-content-between">
             <h5>{{ $chapterTitle }}</h5>
+            <div>
+                <a
+                    href="{{ $previousChapterUrl }}"
+                    class="btn btn-sm btn-outline-dark rounded-0"
+                >&lt;&lt;</a>
+                <a
+                    href="{{ $nextChapterUrl }}"
+                    class="btn btn-sm btn-outline-dark rounded-0"
+                >&gt;&gt;</a>
+            </div>
         </div>
     </div>
 
@@ -85,6 +95,19 @@
                 </div>
                 <hr>
             @endforeach
+        </div>
+    </div>
+
+    <div class="row my-2">
+        <div class="col-md-12">
+            <a
+                href="{{ $previousChapterUrl }}"
+                class="btn btn-sm btn-outline-dark rounded-0"
+            >&lt;&lt; Previous Chapter</a>
+            <a
+                href="{{ $nextChapterUrl }}"
+                class="btn btn-sm btn-outline-dark rounded-0"
+            >&gt;&gt; Next Chapter</a>
         </div>
     </div>
 

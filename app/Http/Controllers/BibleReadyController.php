@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Transprime\Arrayed\Arrayed;
+use Transprime\Url\Url;
 
 class BibleReadyController
 {
@@ -48,10 +49,27 @@ class BibleReadyController
         $cache = \cache()->remember(...);
         $chapterJson = $cache($url, 360, fn() => Http::get($url)->json());
 
+        $nextChapter = min($maxChapter + 1, $chapterInBolls->chapters);
+        $previousChapter = max($maxChapter - 1, 1);
+
+        $previousChapterUrl = Url::make(
+            fullDomain: route('bolls-life-bible-ready'),
+            query: ['book' => $book, 'chapter' => $previousChapter],
+        )->toString();
+
+        $nextChapterUrl = Url::make(
+            fullDomain: route('bolls-life-bible-ready'),
+            query: ['book' => $book, 'chapter' => $nextChapter],
+        )->toString();
+
         return view('bolls-life-bible', [
             'chapterJson' => $chapterJson,
             'chapterTitle' => sprintf("%s %s", $chapterInBolls->name, $maxChapter),
             'bibleVersion' => 'ESV',
+            'nextChapter' => $nextChapter,
+            'previousChapter' => $previousChapter,
+            'previousChapterUrl' => $previousChapterUrl,
+            'nextChapterUrl' => $nextChapterUrl,
         ]);
     }
 }
