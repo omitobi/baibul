@@ -186,7 +186,6 @@
     }
 
     function updateBibleReadyUrl() {
-        console.log({bibleReadyBook, bibleReadyChapter})
         url = bibleReadyUrl + "?book="+ bibleReadyBook + "&chapter=" + bibleReadyChapter;
         console.log({url})
         document.getElementById("bible-ready-open-btn")
