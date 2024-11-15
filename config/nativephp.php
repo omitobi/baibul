@@ -13,7 +13,7 @@ return [
      * usually in the form of a reverse domain name.
      * For example: com.nativephp.app
      */
-    'app_id' => env('NATIVEPHP_APP_ID', 'com.baibul.a[['),
+    'app_id' => env('NATIVEPHP_APP_ID', 'com.baibul.all'),
 
     /**
      * If your application allows deep linking, you can specify the scheme
@@ -47,13 +47,13 @@ return [
          * updater will only work when your application is bundled
          * for production.
          */
-        'enabled' => env('NATIVEPHP_UPDATER_ENABLED', true),
+        'enabled' => env('NATIVEPHP_UPDATER_ENABLED', false),
 
         /**
          * The updater provider to use.
          * Supported: "s3", "spaces"
          */
-        'default' => env('NATIVEPHP_UPDATER_PROVIDER', 'spaces'),
+        'default' => env('NATIVEPHP_UPDATER_PROVIDER', 'github'),
 
         'providers' => [
             'github' => [
