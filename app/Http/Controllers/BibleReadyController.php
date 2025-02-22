@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
@@ -15,7 +16,7 @@ class BibleReadyController
     /**
      * @link https://bolls.life/api/#Get%20a%20translation
      */
-    public function bollsChapter(Request $request)
+    public static function bollsChapter(Request $request): View
     {
         // 43 is John.
         $book = $request->get('book', 'John');
