@@ -25,6 +25,18 @@
                 <div class="card-body">
                     <div class="row">
                         <form class="row" method="get">
+                            <div class="col-6 offset-3">
+                                <label for="bible-ready-book" class="form-label h6">Search In Chapter</label>
+                                <input
+                                    class="form-control"
+                                    list="books"
+                                    id="bible-ready-book"
+                                    name="book"
+                                    placeholder="Type to search..."
+                                >
+                            </div>
+                        </form>
+                        <form class="row" method="get">
                             <div class="col-6">
                                 <label for="bible-ready-book" class="form-label">Book</label>
                                 <input
