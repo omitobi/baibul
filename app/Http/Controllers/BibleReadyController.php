@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Transprime\Arrayed\Arrayed;
 use Transprime\Url\Url;
 
@@ -19,8 +20,11 @@ class BibleReadyController
     public static function bollsChapter(Request $request): View
     {
         // 43 is John.
-        $book = $request->get('book', 'John');
-        $chapter = $request->get('chapter', 1);
+        $book = piper($request->get('book', 'John'))
+                ->to(Str::lower(...))
+                ->to(Str::ucfirst(...))
+                ->up();
+        $chapter = (int) $request->get('chapter', 1);
         $version = piper('esv')
             ->to($request->get(...), 'version')
             ->up(strtoupper(...));

@@ -26,7 +26,7 @@
                     <div class="row">
                         <form class="row" method="get">
                             <div class="col-6">
-                                <label for="book" class="form-label">Book</label>
+                                <label for="bible-ready-book" class="form-label">Book</label>
                                 <input
                                     class="form-control"
                                     list="books"
