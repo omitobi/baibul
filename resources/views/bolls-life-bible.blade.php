@@ -32,7 +32,7 @@
                                     list="books"
                                     id="bible-ready-book"
                                     name="book"
-                                    value="{{ request('book', 'John') }}"
+                                    value="{{ $currentBook }}"
                                     placeholder="Type to search..."
                                     onchange="updateReadyBook(this)"
                                 >
@@ -61,7 +61,10 @@
                             </div>
                             <div class="col-2">
                                 <label for="submit" class="form-label">..</label>
-                                <a class="btn btn-outline-dark" id="bible-ready-open-btn" href="{{ route('bolls-life-bible-ready') }}">Open</a>
+                                <a class="btn btn-outline-dark"
+                                   id="bible-ready-open-btn"
+                                   href="{{ route('bolls-life-bible-ready', ['book' => $currentBook, 'chapter' => $currentChapter]) }}"
+                                >Open</a>
                             </div>
                         </form>
                     </div>

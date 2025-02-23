@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Services\BollsLife\ChapterInBolls;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -31,19 +33,27 @@ class BibleReadyController
 
 //        dd($book, $chapter, $version, $request->all());
 
-        /** @var Arrayed $bookInBolls */
+        /** @var ChapterInBolls[]|Arrayed $bookInBolls */
         $bookInBolls = piper('bibles/bolls.life.esv.json')
             ->to(base_path(...))
-            ->to(File::get(...))
-            ->to(json_decode(...))
+            ->to(File::json(...))
             ->to(fn($d) => (array) $d)
             ->up(arrayed(...));
 
+        $bookInBolls = $bookInBolls->map(fn(array $chapter) => new ChapterInBolls(
+            chapters: $chapter['chapters'],
+            bookid: $chapter['bookid'],
+            name: $chapter['name']
+        ));
+
+        /** @var ChapterInBolls $chapterInBolls */
         $chapterInBolls = $bookInBolls
-            ->offsetGet($bookInBolls->search(fn($d) => $d->name === $book));
-        $maxChapter = min($chapterInBolls->chapters, $chapter);
+            ->collect()
+            ->firstWhere('name', $book);
 
         // Let\s get the bible chapter.
+        $maxChapter = min($chapterInBolls->chapters, $chapter);
+
         $url = sprintf(
             'https://bolls.life/get-chapter/%s/%s/%s',
             $version,
@@ -68,6 +78,8 @@ class BibleReadyController
         )->toString();
 
         return view('bolls-life-bible', [
+            'currentBook' => $book,
+            'currentChapter' => $chapter,
             'chapterJson' => $chapterJson,
             'chapterTitle' => sprintf("%s %s", $chapterInBolls->name, $maxChapter),
             'bibleVersion' => 'ESV',
