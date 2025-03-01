@@ -59,7 +59,7 @@
                                            name="search"
                                            placeholder="Search and press Enter...">
                                         <i class="fas fa-search "></i>
-                                         &nbsp; | &nbsp; <span class="small">{{ $countOfSearch ?: 0 }}</span>
+                                         &nbsp; | &nbsp; <span class="small">{{ $matchesCount ?: 0 }}</span>
                                     </div>
 
                                 <input
