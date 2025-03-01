@@ -5,7 +5,7 @@
 
     let url = bibleReadyUrl;
 
-    function updateReadyBook(el) {
+        function updateReadyBook(el) {
         bibleReadyBook = el.value;
 
         updateBibleReadyUrl();
