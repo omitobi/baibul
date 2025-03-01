@@ -24,9 +24,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <form class="row" method="get">
-                            <div class="col-6 offset-3">
-                                <label for="bible-ready-book" class="form-label h6">Search In Chapter</label>
+                        <form method="get">
+                            <div class="col-4 offset-4">
                                 <input
                                     class="form-control"
                                     list="books"
@@ -34,52 +33,52 @@
                                     name="book"
                                     placeholder="Type to search..."
                                 >
-                            </div>
-                        </form>
-                        <form class="row" method="get">
-                            <div class="col-6">
-                                <label for="bible-ready-book" class="form-label">Book</label>
-                                <input
-                                    class="form-control"
-                                    list="books"
-                                    id="bible-ready-book"
-                                    name="book"
-                                    value="{{ $currentBook }}"
-                                    placeholder="Type to search..."
-                                    onchange="updateReadyBook(this)"
-                                >
-                                <datalist id="books">
-                                    @foreach($books ?? [] as $book)
-                                        <option value="{{ $book }}">
-                                    @endforeach
-                                </datalist>
-                            </div>
-                            <div class="col-4">
-                                <label for="bible-ready-chapter" class="form-label">Chapter</label>
-                                <input
-                                    class="form-control"
-                                    list="chapters"
-                                    id="bible-ready-chapter"
-                                    name="chapter"
-                                    value="{{ request('chapter', 1) }}"
-                                    placeholder="Search..."
-                                    onchange="updateReadyChapter(this)"
-                                >
-                                <datalist id="chapters">
-                                    @foreach($chapters ?? [] as $chapter)
-                                        <option value="{{ $chapter }}">
-                                    @endforeach
-                                </datalist>
-                            </div>
-                            <div class="col-2">
-                                <label for="submit" class="form-label">..</label>
-                                <a class="btn btn-outline-dark"
-                                   id="bible-ready-open-btn"
-                                   href="{{ route('bolls-life-bible-ready', ['book' => $currentBook, 'chapter' => $currentChapter]) }}"
-                                >Open</a>
                             </div>
                         </form>
                     </div>
+                    <form class="row mt-2" method="get">
+                        <div class="col-6">
+                            <label for="bible-ready-book" class="form-label">Book</label>
+                            <input
+                                class="form-control"
+                                list="books"
+                                id="bible-ready-book"
+                                name="book"
+                                value="{{ $currentBook }}"
+                                placeholder="Type to search..."
+                                onchange="updateReadyBook(this)"
+                            >
+                            <datalist id="books">
+                                @foreach($books ?? [] as $book)
+                                    <option value="{{ $book }}">
+                                @endforeach
+                            </datalist>
+                        </div>
+                        <div class="col-4">
+                            <label for="bible-ready-chapter" class="form-label">Chapter</label>
+                            <input
+                                class="form-control"
+                                list="chapters"
+                                id="bible-ready-chapter"
+                                name="chapter"
+                                value="{{ request('chapter', 1) }}"
+                                placeholder="Search..."
+                                onchange="updateReadyChapter(this)"
+                            >
+                            <datalist id="chapters">
+                                @foreach($chapters ?? [] as $chapter)
+                                    <option value="{{ $chapter }}">
+                                @endforeach
+                            </datalist>
+                        </div>
+                        <div class="col-1">
+                            <label for="bible-ready-chapter" class="form-label">...</label>
+                            <a class="btn btn-outline-dark"
+                               id="bible-ready-open-btn"
+                               href="{{ route('bolls-life-bible-ready', ['book' => $currentBook, 'chapter' => $currentChapter]) }}"
+                            >Open</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
