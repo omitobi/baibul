@@ -20,6 +20,7 @@ class BibleReadyController
             ->to(Str::lower(...))
             ->to(Str::ucfirst(...))
             ->up();
+
         $chapter = (int)$request->get('chapter', 1);
         $version = piper('esv')
             ->to($request->get(...), 'version')
@@ -47,11 +48,36 @@ class BibleReadyController
                 ->up(...),
         );
 
+        $search = $request->query('search');
+        $json = $chapterContent->chapterJson;
+        $countOfSearch = null;
+        if ($json && is_string($search) && strlen($search)) {
+            $search = e($search); // Escape search.
+            // Find and replace $search in $json array with <strong>Text<strong>.
+            $json = collect($json)->map(function ($verseArray) use ($search, &$countOfSearch) {
+                $count = 0;
+                $verseArray['text'] = preg_replace(
+                    "/$search/i",
+                    "<strong class='text-warning'>$search</strong>",
+                    e($verseArray['text']),
+                    -1,
+                    $count,
+                );
+
+                if ($count > 0) {
+                    $countOfSearch += $count;
+                }
+
+                return $verseArray;
+            })->all();
+        }
+
         return view('bolls-life-bible', [
             'books' => $books,
             'currentBook' => $book,
             'currentChapter' => $chapter,
-            'chapterJson' => $chapterContent->chapterJson,
+            'chapterJson' => $json,
+            'countOfSearch' => $countOfSearch,
             'chapterTitle' => $chapterContent->chapterTitle,
             'bibleVersion' => 'ESV',
             'nextChapter' => $chapterContent->nextChapter,

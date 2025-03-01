@@ -15,6 +15,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+    <style>
+        .search-box {
+            display: flex;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 25px;
+            padding: 5px 10px;
+            width: 300px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 75%;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .search-box i {
+            color: #555;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,14 +48,31 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <form method="get">
-                            <div class="col-4 offset-4">
+                        <form method="get" class="form-check-inline">
+                            <div class="col-6 offset-4">
+
+                                    <div class="search-box">
+                                        <label for="bible-ready-search"></label>
+                                        <input type="text"
+                                           id="bible-ready-search"
+                                           value="{{ request('search') }}"
+                                           name="search"
+                                           placeholder="Search and press Enter...">
+                                        <i class="fas fa-search "></i>
+                                         &nbsp; | &nbsp; <span class="small">{{ $countOfSearch ?: 0 }}</span>
+                                    </div>
+
                                 <input
+                                    type="hidden"
                                     class="form-control"
-                                    list="books"
-                                    id="bible-ready-book"
+                                    name="chapter"
+                                    value="{{ request('chapter', 1) }}"
+                                >
+                                <input
+                                    type="hidden"
+                                    class="form-control"
                                     name="book"
-                                    placeholder="Type to search..."
+                                    value="{{ $currentBook }}"
                                 >
                             </div>
                         </form>
@@ -105,7 +146,7 @@
             @foreach($chapterJson as $chapter)
                 <div>
                     <strong>{{ $chapter['verse'] }}</strong>
-                    {{ $chapter['text'] }}
+                    {!! $chapter['text'] !!}
                 </div>
                 <hr>
             @endforeach
@@ -127,5 +168,6 @@
 
 </div>
 @include('bible-chapter-switch-script')
+<script></script>
 </body>
 </html>
