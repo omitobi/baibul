@@ -9,7 +9,6 @@ use App\Services\Bible\BooksService;
 use App\Services\BollsLife\BollsLifeSearchService;
 use App\Services\BollsLife\BollsLifeService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Transprime\Url\Url;
 
