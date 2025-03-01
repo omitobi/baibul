@@ -1,11 +1,11 @@
 <script>
     let bibleReadyUrl = {{ \Illuminate\Support\Js::from(route('bolls-life-bible-ready')) }};
-    let bibleReadyBook = "John";
-    let bibleReadyChapter = 1;
+    let bibleReadyBook = {{ \Illuminate\Support\Js::from($currentBook ?? 'John') }};
+    let bibleReadyChapter = {{ \Illuminate\Support\Js::from($currentChapter ?? 1) }};
 
     let url = bibleReadyUrl;
 
-    function updateReadyBook(el) {
+        function updateReadyBook(el) {
         bibleReadyBook = el.value;
 
         updateBibleReadyUrl();

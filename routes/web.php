@@ -1,25 +1,18 @@
 <?php
 
+use App\Http\Controllers\BibleReadyController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/bolls-life/bible-ready', [
-    \App\Http\Controllers\BibleReadyController::class, 'bollsChapter'
-])->name('bolls-life-bible-ready');
+Route::get('/bolls-life/bible-ready', BibleReadyController::bollsChapter(...))
+    ->name('bolls-life-bible-ready');
 Route::view('bible-ready', 'esv-bible-ready');
 Route::view('bible-ready-main', 'bible-ready-main')->name('bible-ready-main');
 Route::get('/', function () {
-    $feed = \Feeds::make('http://www.biblegateway.com/usage/votd/rss/votd.rdf?31');
+    $feed = cache()->remember(
+        'bible-feed',
+        \Carbon\Carbon::now()->endOfDay(),
+        fn() => \Feeds::make('http://www.biblegateway.com/usage/votd/rss/votd.rdf?31'),
+    );
 
     $data = array(
         'title'     => $feed->get_title(),

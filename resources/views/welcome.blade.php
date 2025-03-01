@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Baibul - Bible, Daily Verse, Audio Bible</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -131,7 +131,7 @@
                                         >
                                         <datalist id="books">
                                             @foreach($books ?? [] as $book)
-                                                <option value="{{ $book }}" onclick="getAudio('book', '{{ $book }}')">
+                                                <option value="{{ $book }}">
                                             @endforeach
                                         </datalist>
                                     </div>
@@ -154,7 +154,12 @@
                                     </div>
                                     <div class="col-2">
                                         <label for="submit" class="form-label">..</label>
-                                        <a class="btn btn-outline-dark" id="bible-ready-open-btn" href="{{ route('bolls-life-bible-ready') }}" target="_blank">Open</a>
+                                        <a
+                                            class="btn btn-outline-dark"
+                                            id="bible-ready-open-btn"
+                                            href="{{ route('bolls-life-bible-ready', ['chapter' => 1, 'book' => 'John']) }}"
+                                            target="_blank"
+                                        >Open</a>
                                     </div>
                                 </form>
                             </div>
