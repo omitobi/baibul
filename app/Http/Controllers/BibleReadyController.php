@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Services\BollsLife\BollsLifeService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Transprime\Url\Url;
 
@@ -39,7 +40,15 @@ class BibleReadyController
             query: ['book' => $book, 'chapter' => $chapterContent->nextChapter],
         )->toString();
 
+        $books = cache()->rememberForever(
+            'books',
+            piper(base_path('bibles/books.json'))
+                ->to(File::json(...))
+                ->up(...),
+        );
+
         return view('bolls-life-bible', [
+            'books' => $books,
             'currentBook' => $book,
             'currentChapter' => $chapter,
             'chapterJson' => $chapterContent->chapterJson,
