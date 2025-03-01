@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\FormRequests\BollsLifeBible\BibleChapterRequest;
+use App\Services\Bible\BooksService;
 use App\Services\BollsLife\BollsLifeSearchService;
 use App\Services\BollsLife\BollsLifeService;
 use Illuminate\Contracts\View\View;
@@ -18,11 +19,12 @@ class BibleReadyController
         BibleChapterRequest $request,
         BollsLifeService $bollsLifeService,
         BollsLifeSearchService $bollsLifeSearchService,
+        BooksService $booksService,
     ): View {
         // 43 is John.
         $book = piper($request->get('book', 'John'))
             ->to(Str::lower(...))
-            ->to(Str::ucfirst(...))
+            ->to(Str::title(...))
             ->up();
 
         $chapter = (int)$request->get('chapter', 1);
@@ -35,22 +37,18 @@ class BibleReadyController
             chapter: $chapter,
             version: $version,
         );
+
         $previousChapterUrl = Url::make(
             fullDomain: route('bolls-life-bible-ready'),
-            query: ['book' => $book, 'chapter' => $chapterContent->previousChapter],
+            query: ['book' => $chapterContent->bookName, 'chapter' => $chapterContent->previousChapter],
         )->toString();
 
         $nextChapterUrl = Url::make(
             fullDomain: route('bolls-life-bible-ready'),
-            query: ['book' => $book, 'chapter' => $chapterContent->nextChapter],
+            query: ['book' => $chapterContent->bookName, 'chapter' => $chapterContent->nextChapter],
         )->toString();
 
-        $books = cache()->rememberForever(
-            'books',
-            piper(base_path('bibles/books.json'))
-                ->to(File::json(...))
-                ->up(...),
-        );
+        $books = $booksService->books();
 
         $searchResult = $bollsLifeSearchService->searchInChapterText(
             chapterArray: $chapterContent->chapterJson,
@@ -59,7 +57,7 @@ class BibleReadyController
 
         return view('bolls-life-bible', [
             'books' => $books,
-            'currentBook' => $book,
+            'currentBook' => $chapterContent->bookName,
             'currentChapter' => $chapter,
             'chapterJson' => $searchResult->chapterArray,
             'matchesCount' => $searchResult->matchesCount,

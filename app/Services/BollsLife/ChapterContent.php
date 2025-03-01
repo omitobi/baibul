@@ -7,6 +7,7 @@ namespace App\Services\BollsLife;
 class ChapterContent
 {
     public function __construct(
+        public readonly string $bookName,
         public readonly array $chapterJson,
         public readonly string $chapterTitle,
         public readonly int $previousChapter,

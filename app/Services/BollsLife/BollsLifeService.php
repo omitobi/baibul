@@ -4,6 +4,7 @@ namespace App\Services\BollsLife;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Transprime\Arrayed\Arrayed;
 
 /**
@@ -36,27 +37,34 @@ class BollsLifeService
         /** @var ChapterInBolls $chapterInBolls */
         $chapterInBolls = $bookInBolls
             ->collect()
-            ->firstWhere('name', $book);
+            ->firstWhere('name', Str::title($book));
+
+        $chapters = $chapterInBolls?->chapters ?? 1;
+        // 43 is John.
+        $bookId = $chapterInBolls?->bookid ?? 43;
+        $bookName = $chapterInBolls?->name ?? 'John';
+
 
         // Let\s get the bible chapter.
-        $maxChapter = min($chapterInBolls->chapters, $chapter);
+        $maxChapter = min($chapters ?? 1, $chapter);
 
         $url = sprintf(
             'https://bolls.life/get-chapter/%s/%s/%s',
             $version,
-            $chapterInBolls->bookid,
+            $bookId,
             $maxChapter,
         );
 
         $cache = \cache()->remember(...);
         $chapterJson = $cache($url, $this->cacheTime, fn() => Http::get($url)->json());
 
-        $nextChapter = min($maxChapter + 1, $chapterInBolls->chapters);
+        $nextChapter = min($maxChapter + 1, $chapters);
         $previousChapter = max($maxChapter - 1, 1);
 
-        $chapterTitle = sprintf("%s %s", $chapterInBolls->name, $maxChapter);
+        $chapterTitle = sprintf("%s %s", $bookName, $maxChapter);
 
         return new ChapterContent(
+            bookName: $bookName,
             chapterJson: $chapterJson,
             chapterTitle: $chapterTitle,
             previousChapter: $previousChapter,
