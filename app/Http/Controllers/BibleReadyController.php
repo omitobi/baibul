@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\FormRequests\BollsLifeBible\BibleChapterRequest;
 use App\Services\BollsLife\BollsLifeSearchService;
 use App\Services\BollsLife\BollsLifeService;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Transprime\Url\Url;
@@ -15,7 +15,7 @@ use Transprime\Url\Url;
 class BibleReadyController
 {
     public static function bollsChapter(
-        Request $request,
+        BibleChapterRequest $request,
         BollsLifeService $bollsLifeService,
         BollsLifeSearchService $bollsLifeSearchService,
     ): View {
