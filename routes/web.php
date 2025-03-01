@@ -8,7 +8,11 @@ Route::get('/bolls-life/bible-ready', BibleReadyController::bollsChapter(...))
 Route::view('bible-ready', 'esv-bible-ready');
 Route::view('bible-ready-main', 'bible-ready-main')->name('bible-ready-main');
 Route::get('/', function () {
-    $feed = \Feeds::make('http://www.biblegateway.com/usage/votd/rss/votd.rdf?31');
+    $feed = cache()->remember(
+        'bible-feed',
+        \Carbon\Carbon::now()->endOfDay(),
+        fn() => \Feeds::make('http://www.biblegateway.com/usage/votd/rss/votd.rdf?31'),
+    );
 
     $data = array(
         'title'     => $feed->get_title(),
