@@ -56,7 +56,7 @@ class BollsLifeService
         );
 
         $cache = \cache()->remember(...);
-        $chapterJson = $cache($url, $this->cacheTime, fn() => Http::get($url)->json());
+        $chapterJson = $cache($url, $this->cacheTime, fn() => habitue($url)->get()->toArray());
 
         $nextChapter = min($maxChapter + 1, $chapters);
         $previousChapter = max($maxChapter - 1, 1);
