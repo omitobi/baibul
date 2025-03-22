@@ -9,13 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "^v11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
-        "nativephp/electron": "^0.8.6",
-        "transprime-research/arrayed": "^2.3",
         "nativephp/electron": "^0.5.0",
+        "omitobisam/laravel-habitue": "^4.2",
         "transprime-research/arrayed": "^2.3",
         "transprime-research/php-url": "^1.0",
         "willvincent/feeds": "^2.5"
