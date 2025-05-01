@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\File;
 
 class BooksService
 {
-    public function books(): array
+    public function books(bool $forceRefresh = false): array
     {
-        return cache()->rememberForever(
-            'books',
-            piper(base_path('bibles/books.json'))
-                ->to(File::json(...))
-            ->up(...),
-        );
+        $getBooks = piper(base_path('bibles/books.json'))
+            ->to(File::json(...))->up(...);
+
+        if ($forceRefresh) {
+            $books = cache()->pull('books');
+        }
+
+        return $books ?? cache()->rememberForever('books', $getBooks);
     }
 }

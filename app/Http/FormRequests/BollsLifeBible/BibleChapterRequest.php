@@ -24,7 +24,7 @@ class BibleChapterRequest extends FormRequest
                 'ascii',
                 'min:3',
                 'max:255',
-                Rule::in(app(BooksService::class)->books()),
+                Rule::in(app(BooksService::class)->books((bool) $this->input('fresh'))),
             ],
         ];
     }
