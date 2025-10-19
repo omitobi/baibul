@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\FormRequests\BollsLifeBible\BibleChapterRequest;
 use App\Services\Bible\BooksService;
+use App\Services\BibleRss\RssSourceService;
 use App\Services\BollsLife\BollsLifeSearchService;
 use App\Services\BollsLife\BollsLifeService;
 use Illuminate\Contracts\View\View;
@@ -67,5 +68,19 @@ class BibleReadyController
             'previousChapterUrl' => $previousChapterUrl,
             'nextChapterUrl' => $nextChapterUrl,
         ]);
+    }
+
+    public static function index(RssSourceService $rssSourceService): View
+    {
+        $data = $rssSourceService->getData();
+
+        $data['books'] = json_decode(
+            \Illuminate\Support\Facades\File::get(base_path('bibles/books.json')),
+            true
+        );
+
+        $data['chapters'] = range(1, 150);
+
+        return view('welcome', $data);
     }
 }

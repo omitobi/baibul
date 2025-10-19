@@ -71,4 +71,32 @@ class BollsLifeService
             nextChapter: $nextChapter,
         );
     }
+
+    public function getVerseContent(): VerseContent
+    {
+        $version = 'ESV';
+        $bookId = 43;
+        $chapter = 1;
+        $verse = 1;
+
+        $url = sprintf(
+            'https://bolls.life/get-verse/%s/%s/%s/%s',
+            $version,
+            $bookId,
+            $chapter,
+            $verse,
+        );
+
+        $verseContent = \cache()->remember($url, $this->cacheTime, fn() => habitue($url)->get()->toArray());
+
+        $bookName = 'John';
+
+        return new VerseContent(
+            bookName: $bookName,
+            verseJson: $verseContent,
+            verseTitle: sprintf("%s %s:%s", $bookName, $chapter, $verse),
+            verse: $verse,
+            version: $version,
+        );
+    }
 }
